@@ -1,0 +1,51 @@
+
+@{
+ var payer = Model["payer"];
+ var reste = Model["reste"];
+ var etatDentaire = Model["finis"];
+ var date = Model["date"];
+ var idPatient = Model["idPatient"];
+
+}
+<style>
+  .divNumero {
+    width: 100px;
+    height: 25px;
+    margin-right: 10px; 
+    padding-left: 5px;
+  }
+
+  .divNumero:hover {
+    cursor: pointer;
+  }
+</style>
+<main id="main" class="main">
+ <section class="section">
+  <div class="row">
+      <div class="col-lg-12">
+          <h4>Etat dentaire:</h4>
+          <div class="row">
+              <div class="col-lg-3">
+               <p>Net Payer: @payer Ar</p>
+               <p>Reste: @reste Ar</p>
+              </div>
+          </div>
+            <h5>Listes des dents finis:</h5>
+            <div class="row">
+                <div class="col-lg-5">
+                  <div class="d-flex justify-content-center">
+                    @for(int i=0; i<etatDentaire.Count; i++) {
+                      <div class="divNumero" style="background-color: @etatDentaire[i].getCouleur(); color: @etatDentaire[i].getCouleurString();" read-only>@etatDentaire[i].idDent : <span id="valeur_@etatDentaire[i].idDent">@etatDentaire[i].etat</span></div>
+                    }
+                  </div>
+                </div>
+                <div class="row mb-3" style="margin-top: 20px;">
+                    <div class="col-sm-10">
+                    <a href="/Patient/etatDentaire?date=@date&&idPatient=@idPatient"><button type="submit" class="btn btn-primary" id="submit">Retour</button></a>
+                </div>
+            </div>
+            </div>
+      </div>
+  </div>  
+ </section>
+</main>

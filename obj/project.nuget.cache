@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "VV0PG/QWBv3pakd8F501e8ji8HES+UABh/AWP+Dl4fBUUdU0YR0RLHITubbFoYgl6YwQvxhjT7SAvHtYaItFhg==",
+  "success": true,
+  "projectFilePath": "D:\\Mr_Tahiana\\S5\\dentiste\\dentiste.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Rota\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Rota\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.0\\microsoft.extensions.logging.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\Rota\\.nuget\\packages\\npgsql\\8.0.1\\npgsql.8.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}

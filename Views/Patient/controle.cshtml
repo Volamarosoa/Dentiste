@@ -1,0 +1,37 @@
+<main id="main" class="main">
+  <section class="section">
+    <div class="row">
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-5">
+            @if (!string.IsNullOrEmpty(ViewBag.Erreur))
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewBag.Erreur
+                </div>
+            }
+                <form action="@Url.Action("etatDentaire", "Patient")" method="get" class="">
+                    <h4>Faire un controle dentaire:</h4>
+                    <div class="row mb-3">
+                        <label for="inputDate" class="col-sm-2 col-form-label">Date:</label>
+                        <div class="col-sm-10">
+                            <input type="date" name="date" class="form-control" placeholder="Date d'ajout" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputDate" class="col-sm-2 col-form-label">ID du Patient:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="idPatient" class="form-control" placeholder="Numero d'identifiant du patient" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary" id="submit">Valider</button>
+                        </div>
+                    </div>
+                </form>
+            <div>
+        </div>
+    </div>    
+  </section>
+</main>

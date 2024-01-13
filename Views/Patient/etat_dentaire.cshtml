@@ -1,0 +1,152 @@
+
+@{
+ var patient = Model["patient"];
+ var etatDentaire = patient.etatDentaire;
+ var date = Model["date"];
+}
+<style>
+  .divNumero {
+    width: 100px;
+    height: 25px;
+    margin-right: 10px; 
+    padding-left: 5px;
+  }
+
+  .divNumero:hover {
+    cursor: pointer;
+  }
+</style>
+<main id="main" class="main">
+ <section class="section">
+  <div class="row">
+      <div class="col-lg-12">
+          <h4>Etat dentaire:</h4>
+          <div class="row">
+              <div class="col-lg-3">
+               <p>Numero Identifiant: @patient.id</p>
+               <p>Nom: @patient.nom</p>
+               <p>Prenom: @patient.prenom</p>
+               <p>Date de Naissance: @patient.date_de_naissance</p>
+               <p>Genre: @patient.GetGenre()</p>
+              </div>
+              <div class="col-lg-3">
+                <P>Violet: Fini</p>
+                <P>Jaune: Nettoyer</p>
+                <P>Marron: Reparer</p>
+                <P>Noir: Enlever</p>
+                <P>Rouge: Remplacer</p>
+              </div>
+              <div class="col-lg-3">
+                <form action="@Url.Action("controleDentaire", "Patient")" method="post" class="">
+                    <h4>Faire un controle dentaire:</h4>
+                    <input type="date" name="date" value="@date" hidden/>
+                    <input type="text" name="idPatient" value="@patient.id" hidden/>
+                    <div class="row mb-3">
+                        <label for="inputDate" class="col-sm-2 col-form-label">Priorite:</label>
+                        <div class="col-sm-10">
+                            <select name="priorite" class="form-control" required>
+                                <option value="">Priorite</option>
+                                <option value="10">Beaute</option>
+                                <option value="20">Sante</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <label for="inputDate" class="col-sm-2 col-form-label">Budget:</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="budget" class="form-control" placeholder="Argents disponible" required>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-sm-10">
+                        <button type="submit" class="btn btn-primary" id="submit" style="margin-left: 250px;">Faire</button>
+                        </div>
+                    </div>
+                </form>
+              </div>
+          </div>
+          <form action="@Url.Action("modifierEtatDentaire", "Patient")" method="post" class="">
+            <h5>En Haut</h5>
+            <input type="date" name="date" value="@date" hidden/>
+            <input type="text" name="idPatient" value="@patient.id" hidden/>
+            <div class="row">
+                <div class="col-lg-5">
+                  <h6>Droite</h6>
+                  <div class="d-flex justify-content-center">
+                    @for(int i=7; i>=0; i--) {
+                      <input type="text" id="@etatDentaire[i].idDent" name="@etatDentaire[i].idDent" value="@etatDentaire[i].etat" hidden />
+                      <div class="divNumero" id="div_@etatDentaire[i].idDent" style="background-color: @etatDentaire[i].getCouleur(); color: @etatDentaire[i].getCouleurString();" onclick="setEtat('@etatDentaire[@i].idDent')" read-only>@etatDentaire[i].idDent : <span id="valeur_@etatDentaire[i].idDent">@etatDentaire[i].etat</span></div>
+                    }
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <h6>Gauche</h6>
+                  <div class="d-flex justify-content-center">
+                    @for(int i=8; i<16; i++) {
+                      <input type="text" id="@etatDentaire[i].idDent" name="@etatDentaire[i].idDent" value="@etatDentaire[i].etat" hidden />
+                      <div class="divNumero" id="div_@etatDentaire[i].idDent" style="background-color: @etatDentaire[i].getCouleur(); color: @etatDentaire[i].getCouleurString();" onclick="setEtat('@etatDentaire[@i].idDent')" read-only>@etatDentaire[i].idDent : <span id="valeur_@etatDentaire[i].idDent">@etatDentaire[i].etat</span></div>
+                    }
+                  </div>
+                </div>
+            </div>
+            <h5>En Bas</h5>
+            <div class="row">
+                <div class="col-lg-5">
+                  <h6>Droite</h6>
+                  <div class="d-flex justify-content-center">
+                    @for(int i=31; i>=24; i--) {
+                      <input type="text" id="@etatDentaire[i].idDent" name="@etatDentaire[i].idDent" value="@etatDentaire[i].etat" hidden />
+                      <div class="divNumero" id="div_@etatDentaire[i].idDent" style="background-color: @etatDentaire[i].getCouleur(); color: @etatDentaire[i].getCouleurString();" onclick="setEtat('@etatDentaire[@i].idDent')" read-only>@etatDentaire[i].idDent : <span id="valeur_@etatDentaire[i].idDent">@etatDentaire[i].etat</span></div>
+                    }
+                  </div>
+                </div>
+                <div class="col-lg-6">
+                  <h6>Gauche</h6>
+                  <div class="d-flex justify-content-center">
+                    @for(int i=16; i<24; i++) {
+                      <input type="text" id="@etatDentaire[i].idDent" name="@etatDentaire[i].idDent" value="@etatDentaire[i].etat" hidden />
+                      <div class="divNumero" id="div_@etatDentaire[i].idDent" style="background-color: @etatDentaire[i].getCouleur(); color: @etatDentaire[i].getCouleurString();" onclick="setEtat('@etatDentaire[@i].idDent')" read-only>@etatDentaire[i].idDent : <span id="valeur_@etatDentaire[i].idDent">@etatDentaire[i].etat</span></div>
+                    }
+                  </div>
+                </div>
+            </div>
+            <div class="row mb-3" style="margin-top: 20px; margin-left: 1100px;">
+                <div class="col-sm-10">
+                <button type="submit" class="btn btn-primary" id="submit">Modifier</button>
+                </div>
+            </div>
+          </form>
+      </div>
+  </div>  
+ </section>
+</main>
+
+ <script>
+  function color(etat) {
+    if (etat == 0)
+      return ["red"];
+    else if(etat > 0 && etat <= 3)
+      return ["black", "white"];
+    else if(etat >= 4 && etat <= 6)
+      return ["brown", "white"];
+    else if(etat >= 7 && etat <= 9)
+      return ["yellow", "black"];
+    return ["rgb(225, 48, 139)", "black"];
+  }
+  function setEtat(idDent) {
+    var inputDent = document.getElementsByName(""+idDent)[0];
+    var divDent = document.getElementById("valeur_"+idDent);
+    var divCss = document.getElementById("div_"+idDent);
+    console.log(divDent);
+    var test = inputDent.value;
+    if(inputDent.value > 0)
+      inputDent.value -= 1; 
+    else
+      inputDent.value = 10;
+    divDent.innerHTML = inputDent.value;
+    var couleur = color(inputDent.value);
+    divCss.style.backgroundColor = couleur[0];
+    divCss.style.color = couleur[1];
+    console.log("idDent: " + idDent + " value: " + inputDent.value + " test: " + test);
+  }
+</script>
